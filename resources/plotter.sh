@@ -1,7 +1,5 @@
 # !bin/bash
 
-OUTPUT_TEMP="data.dat"
-
 # HELP
 Help() {
 
@@ -54,7 +52,8 @@ fi
 
 INPUT=$1
 OUTPUT=$2    
-                 
+OUTPUT_TEMP=$INPUT".dat"
+      
 if [ -z "$X" ]; then
     X=1    
 fi
@@ -63,28 +62,39 @@ if ! [ -z "$TYPE" ] ; then
     TYPE="with $TYPE"
 fi
 
-cat $INPUT | grep $FILTER | cut -d ' ' -f2- | sed 's/[][]//g'  | sed 's/[a-zA-Z]*://g'| sed 's/;/\t/g' > $OUTPUT_TEMP
+echo "passo 1 --- " cat $INPUT | grep "$FILTER" | cut -d ' ' -f2- | sed 's/[][]//g'  | sed 's/[a-zA-Z]*://g'| sed 's/;/\t/g'
 
-XLABEL=`cat $INPUT | grep $FILTER | cut -d ' ' -f2- | sed 's/[][]//g' | cut -d ';' -f$X | cut -d ':' -f1 | head -n 1` 
+cat $INPUT | grep "$FILTER" | cut -d ' ' -f2- | sed 's/[][]//g'  | sed 's/[a-zA-Z]*://g'| sed 's/;/\t/g' > $OUTPUT_TEMP
+
+XLABEL=`cat $INPUT | grep "$FILTER" | cut -d ' ' -f2- | sed 's/[][]//g' | cut -d ';' -f$X | cut -d ':' -f1 | head -n 1` 
+
+echo "passo 2 --- " $XLABEL
 
 for YIN in `echo $Y | tr ":" "\n"`
 do
-    YLABEL=`cat $INPUT | grep $FILTER | cut -d ' ' -f2- | sed 's/[][]//g' | cut -d ';' -f$YIN | cut -d ':' -f1 | head -n 1` 
+    YLABEL=`cat $INPUT | grep "$FILTER" | cut -d ' ' -f2- | sed 's/[][]//g' | cut -d ';' -f$YIN | cut -d ':' -f1 | head -n 1` 
+
+echo "passo 3 --- " $XLABEL
 
     if ! [ -z "$PLOTCMD" ]; then
         PLOTCMD=$PLOTCMD,    
     fi
 
     PLOTCMD=$PLOTCMD"\"$OUTPUT_TEMP\" using $X:$YIN $TYPE title \"$YLABEL\""
+    
+echo "passo 4 --- " $PLOTCMD
 
 done
 
 PLOTCMD="plot "$PLOTCMD
 
+echo "passo 5 --- " $PLOTCMD
+
+
 gnuplot << EOF
 
 set grid
-set xrange [0:]
+set xtics ("1" 1,"2"  2,"4"  4,"8"  8)
 set terminal png
 set output '$OUTPUT'
 set xlabel "$XLABEL"
@@ -94,4 +104,4 @@ pause -1
 
 EOF
 
-rm $OUTPUT_TEMP
+--rm $OUTPUT_TEMP

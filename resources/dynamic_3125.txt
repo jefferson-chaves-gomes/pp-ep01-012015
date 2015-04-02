@@ -1,0 +1,4 @@
+[threads:1];[chunkSize:3125];[scheduler:dynamic];[tserial:0.017380];[tparallel:0.017647];[speedup:0.985307];[eficiency:0.985307]
+[threads:2];[chunkSize:3125];[scheduler:dynamic];[tserial:0.017906];[tparallel:0.011173];[speedup:1.624586];[eficiency:0.812293]
+[threads:4];[chunkSize:3125];[scheduler:dynamic];[tserial:0.017679];[tparallel:0.009848];[speedup:1.812315];[eficiency:0.453079]
+[threads:8];[chunkSize:3125];[scheduler:dynamic];[tserial:0.018975];[tparallel:0.012730];[speedup:1.500906];[eficiency:0.187613]

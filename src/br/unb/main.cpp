@@ -11,58 +11,86 @@
 #include <iostream>
 #include <set>
 #include <iterator>
+#include <chrono>
+#include <math.h>
 #include <time.h>
 #include <omp.h>
+#include <boost/format.hpp>
 
 // Definitions
+// -----------------------------------------------------
 #define MIN_RANGE 1
 #define MAX_RANGE 1000000000
+#define MAX_THREADS 10
 
 // Enums definitions
+// -----------------------------------------------------
 enum OutputType {
 	NONE = 0,
     TIME = 1,
     LIST = 2,
-    ALL = 3
+    ALL  = 3
 };
 
-// Strutcs definitions
+// Structs definitions
+// -----------------------------------------------------
 struct Result {
-    long processTime;
+    std::chrono::duration<double> processTime;
     std::set<int> lstPrimes;
 };
 
 // Functions declarations
+// -----------------------------------------------------
 int readUpperLimit();
 OutputType readOutputType();
 Result findPrimesSequential(int);
+Result findPrimesParallel(int upperLimit, int, int);
 bool isPrime(int num);
 void printResult(OutputType, Result);
+void printTimeOutputType(Result);
+void printListOutputType(Result);
 
-// Global variables
-int processTime = -1;
-
+// main Function
+// -----------------------------------------------------
 int main(int argc, char *argv[]) {
 	int upperLimit = readUpperLimit();
 	OutputType outputType = readOutputType();
+	// Check Sequential
 	Result result = findPrimesSequential(upperLimit);
 	printResult(outputType, result);
-
-
-
-//
-//	for (int i = 2; i < num; i++) {
-//		if (isPrime(i)) {
-//			primesArray[primesSize++] = i;
-//		}
-//	}
-//	for (int i = 0; i < primesSize; i++) {
-//		std::cout << primesArray[i] << " - ";
-//	}
-
+	// STATIC
+    for (int i = 2; i <= 8; i *= 2) {
+        int chunkSize = upperLimit / i;
+        omp_set_schedule(omp_sched_static, chunkSize);
+        for (int i = 1; i <= MAX_THREADS; ++i) {
+            result = findPrimesParallel(upperLimit, i, chunkSize);
+            printResult(outputType, result);
+        }
+    }
+    // DYNAMIC
+    for (int i = 2; i <= 8; i *= 2) {
+        int chunkSize = upperLimit / i;
+        omp_set_schedule(omp_sched_static, chunkSize);
+        for (int i = 1; i <= MAX_THREADS; ++i) {
+            result = findPrimesParallel(upperLimit, i, chunkSize);
+            printResult(outputType, result);
+        }
+    }
+    // GUIDED
+    for (int i = 2; i <= 8; i *= 2) {
+        int chunkSize = upperLimit / i;
+        omp_set_schedule(omp_sched_static, chunkSize);
+        for (int i = 1; i <= MAX_THREADS; ++i) {
+            result = findPrimesParallel(upperLimit, i, chunkSize);
+            printResult(outputType, result);
+        }
+    }
+    std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
 
+// Function implementations
+// -----------------------------------------------------
 int readUpperLimit() {
 	int num = 0;
 	std::cout << std::endl << "Informe um limite superior da lista de primos a ser impressa: " << std::flush;
@@ -104,40 +132,68 @@ OutputType readOutputType() {
 
 Result findPrimesSequential(int upperLimit) {
 	Result result;
-	clock_t startTime = clock();
-	for (int i = 2; i < upperLimit; i++) {
-		if (isPrime(i)) {
-			result.lstPrimes.insert(i);
-		}
-	}
-	clock_t endTime = clock();
-	result.processTime = (endTime - startTime) / CLOCKS_PER_SEC;
+	std::chrono::time_point<std::chrono::system_clock> startTime, endTime;
+	startTime = std::chrono::system_clock::now();
+    for (int i = 2; i < upperLimit; i++) {
+        if (isPrime(i)) {
+            result.lstPrimes.insert(i);
+        }
+    }
+	endTime = std::chrono::system_clock::now();
+	result.processTime = endTime - startTime;
 	return result;
 }
 
 bool isPrime(int num) {
 	for (int i = 2; i < num; ++i) {
 		if (num % i == 0) {
-			return false;
+		    return false;
 		}
 	}
 	return true;
 }
 
+Result findPrimesParallel(int upperLimit, int numThreads, int chunkSize) {
+    Result result;
+    std::chrono::time_point<std::chrono::system_clock> startTime, endTime;
+    startTime = std::chrono::system_clock::now();
+    #pragma omp parallel for num_threads(numThreads) shared(upperLimit, result)
+        for (int i = 2; i < upperLimit; i++) {
+            if (isPrime(i)) {
+                # pragma omp critical {
+                    result.lstPrimes.insert(i);
+                }
+            }
+    endTime = std::chrono::system_clock::now();
+    result.processTime = endTime - startTime;
+    return result;
+}
+
 void printResult(OutputType outputType, Result result) {
+    std::cout << std::endl;
 	switch (outputType) {
 		case TIME:
-
+		    printTimeOutputType(result);
 			break;
 		case LIST:
-			for (std::set<int>::iterator element = result.lstPrimes.begin(); element != result.lstPrimes.end(); element++) {
-				std::cout << *element << " ";
-			}
+		    printListOutputType(result);
 			break;
 		case ALL:
-
+		    printTimeOutputType(result);
+		    std::cout << std::endl;
+		    printListOutputType(result);
 			break;
 		default:
 			break;
 	}
+}
+
+void printTimeOutputType(Result result) {
+    std::cout <<  (boost::format("%7.6f") % (result.processTime.count())).str() << std::flush;
+}
+
+void printListOutputType(Result result) {
+    for (std::set<int>::iterator element = result.lstPrimes.begin(); element != result.lstPrimes.end(); element++) {
+        std::cout << *element << " " << std::flush;
+    }
 }

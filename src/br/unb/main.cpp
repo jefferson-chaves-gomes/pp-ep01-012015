@@ -58,12 +58,16 @@ int main(int argc, char *argv[]) {
     OutputType outputType;
     if (argc > 1) {
         if (argc != 3) {
-            std::cout << "Modo de uso: ./pp-ep01-012015 [numero_limite] [ time | list | all] | Ou nao informe nenhum parametro" << std::endl << std::flush;
+            std::cout << "Modo de uso: ./pp-ep01-012015 [numero_limite] [ time | list | all] | Ou nao informe nenhum parametro!" << std::endl << std::flush;
             return EXIT_SUCCESS;
         } else {
             upperLimit = atoi(argv[1]);
             std::string input(argv[2]);
             outputType = stringToOutputType(input);
+            if (outputType == NONE) {
+                std::cout << "Modo de uso: ./pp-ep01-012015 [numero_limite] [ time | list | all] | Ou nao informe nenhum parametro!" << std::endl << std::flush;
+                return EXIT_SUCCESS;
+            }
         }
     } else {
         upperLimit = readUpperLimit();

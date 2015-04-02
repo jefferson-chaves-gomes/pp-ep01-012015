@@ -1,0 +1,84 @@
+
+./plotter.sh -x 1 -y 6:7 -g lines -f "" gnuplot-data.txt  static_80_perform.png
+./plotter.sh -x 1 -y 5 -g lines -f "" gnuplot-data.txt  static_80_time.png
+./plotter.sh -x 1 -y 6:7 -g lines -f "" gnuplot-data.txt  static_20_perform.png
+./plotter.sh -x 1 -y 5 -g lines -f "" gnuplot-data.txt  static_20_time.png
+
+--- STATIC ---
+
+[Threads:1];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000158];[Speedup:0.968354];[Eficiency:0.968354]
+[Threads:2];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000151];[Speedup:1.013245];[Eficiency:0.506623]
+[Threads:3];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000138];[Speedup:1.108696];[Eficiency:0.369565]
+[Threads:4];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000249];[Speedup:0.614458];[Eficiency:0.153614]
+[Threads:5];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000168];[Speedup:0.910714];[Eficiency:0.182143]
+[Threads:6];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000145];[Speedup:1.055172];[Eficiency:0.175862]
+[Threads:7];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:0.148688]
+[Threads:8];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.140625]
+[Threads:9];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.124088]
+[Threads:10];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000175];[Speedup:0.874286];[Eficiency:0.087429]
+[Threads:1];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000150];[Speedup:1.020000];[Eficiency:1.020000]
+[Threads:2];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000151];[Speedup:1.013245];[Eficiency:0.506623]
+[Threads:3];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000209];[Speedup:0.732057];[Eficiency:0.244019]
+[Threads:4];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000149];[Speedup:1.026846];[Eficiency:0.256711]
+[Threads:5];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000150];[Speedup:1.020000];[Eficiency:0.204000]
+[Threads:6];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000148];[Speedup:1.033784];[Eficiency:0.172297]
+[Threads:7];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000148];[Speedup:1.033784];[Eficiency:0.147683]
+[Threads:8];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000150];[Speedup:1.020000];[Eficiency:0.127500]
+[Threads:9];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000146];[Speedup:1.047945];[Eficiency:0.116438]
+[Threads:10];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000149];[Speedup:1.026846];[Eficiency:0.102685]
+
+
+./plotter.sh -x 1 -y 6:7 -g lines -f "" gnuplot-data.txt  dynamic_80_perform.png
+./plotter.sh -x 1 -y 5 -g lines -f "" gnuplot-data.txt  dynamic_80_time.png
+./plotter.sh -x 1 -y 6:7 -g lines -f "" gnuplot-data.txt  dynamic_20_perform.png
+./plotter.sh -x 1 -y 5 -g lines -f "" gnuplot-data.txt  dynamic_20_time.png
+
+
+--- DYNAMIC ---
+[Threads:1];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000148];[Speedup:1.033784];[Eficiency:1.033784]
+[Threads:2];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000149];[Speedup:1.026846];[Eficiency:0.513423]
+[Threads:3];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000146];[Speedup:1.047945];[Eficiency:0.349315]
+[Threads:4];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:0.260204]
+[Threads:5];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:0.208163]
+[Threads:6];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000146];[Speedup:1.047945];[Eficiency:0.174658]
+[Threads:7];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:0.148688]
+[Threads:8];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:0.130102]
+[Threads:9];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:0.115646]
+[Threads:10];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000148];[Speedup:1.033784];[Eficiency:0.103378]
+[Threads:1];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:1.040816]
+[Threads:2];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000148];[Speedup:1.033784];[Eficiency:0.516892]
+[Threads:3];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000148];[Speedup:1.033784];[Eficiency:0.344595]
+[Threads:4];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000147];[Speedup:1.040816];[Eficiency:0.260204]
+[Threads:5];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000154];[Speedup:0.993506];[Eficiency:0.198701]
+[Threads:6];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.186131]
+[Threads:7];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.159541]
+[Threads:8];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000135];[Speedup:1.133333];[Eficiency:0.141667]
+[Threads:9];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000135];[Speedup:1.133333];[Eficiency:0.125926]
+[Threads:10];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.111679]
+
+./plotter.sh -x 1 -y 6:7 -g lines -f "" gnuplot-data.txt  guided_80_perform.png
+./plotter.sh -x 1 -y 5 -g lines -f "" gnuplot-data.txt  guided_80_time.png
+./plotter.sh -x 1 -y 6:7 -g lines -f "" gnuplot-data.txt  guided_20_perform.png
+./plotter.sh -x 1 -y 5 -g lines -f "" gnuplot-data.txt  guided_20_time.png
+
+--- GUIDED ---
+[Threads:1];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:1.116788]
+[Threads:2];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.562500]
+[Threads:3];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.375000]
+[Threads:4];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.281250]
+[Threads:5];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.225000]
+[Threads:6];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.187500]
+[Threads:7];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000138];[Speedup:1.108696];[Eficiency:0.158385]
+[Threads:8];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.139599]
+[Threads:9];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000164];[Speedup:0.932927];[Eficiency:0.103659]
+[Threads:10];[ChunkSize:800];[Scheduler:static];[tserial:0.000153];[Time:0.000146];[Speedup:1.047945];[Eficiency:0.104795]
+[Threads:1];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000139];[Speedup:1.100719];[Eficiency:1.100719]
+[Threads:2];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000158];[Speedup:0.968354];[Eficiency:0.484177]
+[Threads:3];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000138];[Speedup:1.108696];[Eficiency:0.369565]
+[Threads:4];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.279197]
+[Threads:5];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.225000]
+[Threads:6];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000136];[Speedup:1.125000];[Eficiency:0.187500]
+[Threads:7];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.159541]
+[Threads:8];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.139599]
+[Threads:9];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000137];[Speedup:1.116788];[Eficiency:0.124088]
+[Threads:10];[ChunkSize:200];[Scheduler:static];[tserial:0.000153];[Time:0.000135];[Speedup:1.133333];[Eficiency:0.113333]
